@@ -1,7 +1,6 @@
-Hello and welcome to this blog. Edit the `index.md` file to change this content. All pages on the blog, including this one, use [Markdown](https://guides.github.com/features/mastering-markdown/). You can include images:
+## Bio
+I am a PhD student at Imperial College London in the BiomedIA group, supervised by Ben Glocker and David Sharp. 
+My interest in machine learning derives from the vision of using mathematical tools and computational power to help humans make better decisions in fields affecting people's wellbeing. My resaearch focuses on the analysis of Traumatic Brain Injury (TBI) patients CT scans. I also have an interest in causality and machine explainability. 
 
-![Image of fast.ai logo](images/logo.png)
+Prior to my PhD, I graduated from an undergraduate degree in Pure Mathematics from Imperial in 2015, onboarded a short career in finance at Goldman Sachs between 2015 and 2017, then pivoted into machine learning through a masters in Data Science at ETH and my current PhD.
 
-## This is a title
-
-And you can include links, like this [link to fast.ai](https://www.fast.ai). Posts will appear after this file. 
