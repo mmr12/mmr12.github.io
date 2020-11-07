@@ -8,12 +8,12 @@ Here's the table of contents:
 1. TOC
 {:toc}
 
-## Introduction
-### The Generalisation quest
+## 1. Introduction
+### 1.i. The Generalisation quest
 
 One of the key considerations of any predictive method is how well it performs on unseen data. Usually, to estimate the generalisation error one pools together all data collected, shuffles and separates it into a training and test set, trains the model to learn correlations between the input and the output on the former and reports the error metric on the latter. Although this approach is already indicative on whether a model is overfitting to the training data, it can lead the algorithm to absorb data collection biases, learning spurious correlations and hindering its ability to generalise to unseen situations. 
 
-### Student GPA example
+### 1.ii. Student GPA example
 As an example, say we would like to predict student's Grade Point Average (GPA). We obtain data from two universities A and B about the amount of time the student spent studying and their first salary after leaving university. We shuffle and split the data, train an algorithm and obtain a good accuracy on the test data. We then apply the same algorithm to a third dataset collected from university C, and find that our accuracy drops. Looking into the data, we notice that students with similar GPA graduating from university A earn a first salary 10% higher than students from university B, and 25% higher than students from university C. This phenomenon could be explained by unoberseved variables affecting the student first salary such as location and university reputation. The result is that the correlation between the student GPA and its first salary is dependent on the environment, or, as we define it, *spurious*. Hence a model using a student first salary as a predictor is likely to fail in unseen scenarios. 
 
 To the contrary, as a thought experiment, if students were magically forced to study less for their exams, then we would see their grades drop accordingly. Therefore the relationship between the amount of time spent studying and the student GPA is unmoved by changing environments. We say that the relationship between the study hours and the student's GPA is invariant. Treating the datasets from university A and B separately would enable us to discern spurious correlations from invariant ones and increase the robustness of our predictive model.
@@ -21,18 +21,17 @@ To the contrary, as a thought experiment, if students were magically forced to s
 
 How can we identify and leverage invariant relationships to create more robust predictors?
 
-### Cause and effect
+### 1.iii. Cause and effect
 In order to answer the question, consider what makes the relationship between the number of hours studied and a student's GPA. In universal wisdom, if a student studies for their course then they will achieve high grades. From a *cause and effect* optic, we intuitively know that the amount of time worked (H) is the cause of the student grade (G). If we were to doubt our intuition, a simple timeline argument supports the claim. As the studying happens before the exam, the exam cannot be the cause of the studying. We say that H is the cause of G. In addition, students with higher GPA are more likely to get higher paying jobs (S). Hence we claim that G causes S. The relationship between the three variables is depicted in Figure 1, where arrows represent causal relationships. A more in depth explanation of such causal graphs takes place in Section *Structural Equation Model and causal graphs*. 
 
-![](../images/logo.png)
 ![Student GPA causal graph](../images/2020/11/07/Fig1.jpg)
 __*Figure 1: Student GPA causal graph*__
 
 What are the defining factors of the causal relationship between H and G? We will answer this question in Section *Causal parents*. In Section *Interventions* we explain how environments may change, whereas in the next Section *Invariant predictors* we discuss two methods to utilise the invariance of causal relationships to build robust predictive models across environments.
 
-## Causality
-### Causal graph and nomenclature
-#### Causal parents
+## 2. Causality
+### 2.i. Causal graph and nomenclature
+#### 2.i.a. Causal parents
 Following the example in the introduction, the GPA of a student is caused by the number of hours they spent studying. If the new variable 'weather' ($$W$$) is introduced, we can safely state that overall the weather has no impact on a student GPA, that is the same number of hours of study will result in the same GPA. Translating this statement in mathematical terms with variables $H$, $G$ and $W$ we obtain:
 
 \begin{equation}
@@ -60,7 +59,7 @@ Although equality (\ref{eq:parent-inv}) holds in most scenarios, a specific type
 Or, as Peters et al. [2016] note [^1]:
 >If we consider all `direct causes' of a target variable of interest, then the conditional distribution of the target given the direct causes will not change when we interfere experimentally with all other variables in the model except the target itself.[Peters et al., 2016, p. 948][^1]
 
-#### Structural Equation Model and causal graphs
+#### 2.i.b. Structural Equation Model and causal graphs
 To describe the knowledge of all causal relationships present in a given universe of variables $\{X_1,...,X_d\}$, we introduce the concept of Structural Equation Model (SEM).
 
  __*Definition:*__
@@ -94,7 +93,7 @@ The link between SEM and probability follows from the former's definition and is
  __*Definition:*__
 *A variable $X_i$ is independent of its non-descendants given its parents par$(X_i)$.* 
 
-#### SEM and Bayesian Networks
+#### 2.i.c. SEM and Bayesian Networks
 Although causal graphs can look similar to Bayesian networks, probabilistic networks and causal networks are not interchangeable. Probabilistic networks relate to the joint distribution of variables present in the system. Edges from variable nodes have the single use to indicate the probabilistic independences extracted from the data. However, the orientation of the arrows bare no significance and cannot be interpreted in a causal manner. As an example inspired from  Dawid [2010][^4], Figure 2 shows three Markov equivalent graphs, that graphs they can all be interpreted similarly in a probabilistic context. By d-separation
 , 'first salary' is independent from 'weekly hours studying' given 'GPA average'. However only one set of arrows defines the natural relation between the three variables, that is their causal relationship shown in Figure 1.
 
@@ -111,7 +110,7 @@ In Bayesian networks theory, two variables are independent if they are d-separat
 
 If we assume the causal graph will be one of the Markov equivalent graphs, we cannot know which equivalent graph that is. On the other hand, two variables might be independent in probability but linked in causality. As an example, take the relationship between weight and exercise. Exercise consumes calories which decreases weight, but also increases appetite which increases weight. If in a dataset collected the causal effect of exercise on weight and appetite cancel each other then one would observe that weight and exercise are probabilistically independent.
 
-#### Assumptions
+#### 2.i.d. Assumptions
 So far we described how causal parents are defined, and how causal graphs and Bayesian graphs relate (or rather how they do not).
 
 In order to reach more meaningful conclusions, a few assumptions can be to restrict the universe of possibilities. 
@@ -127,7 +126,7 @@ A criticism of assuming faithfulness is that up to our knowledge, there is no me
 
 Having defined the causal graph, we now describe how different environments are created.
 
-### Interventions
+### 2.ii. Interventions
 We call an intervention a variation on a causal graph. It can either be a natural or a human imposed variation. A common example of a human made intervention is the randomised control trial, where a drug is given blindly with equal probability to two different groups of people. Given the random blind assignment, the group of patients receiving the drug has similar characteristics to the group of patients not receiving the drug. The resulting relative improvement in health can therefore only attributed to the drug. The administration of the drug is an intervention on the environment.
 
 Formally,
@@ -157,8 +156,8 @@ Set an intervention $int_e$ to be represented by a variable $I$. Such that $I$ c
 ![Interventions on Causal Graphs](/images/2020/11/07/Fig3.png)
 __*Figure 3: Interventions on Causal Graphs*__
 
-#### Hard interventions
-The first type of intervention we consider is a hard intervention. This type of intervention is also called a "do-intervention" Pearl [2010][^6] and "structural intervention" Eberhardt and Scheines [2007][^7]. The intervention overwrites the distribution of a given variable. In our example, a hard intervention $int_{\text{hard}}$ denoted by $h$ is
+#### 2.ii.a. Hard interventions
+The first type of intervention we consider is a hard intervention. This type of intervention is also called a "do-intervention" Pearl [2010][^6] and "structural intervention" Eberhardt and Scheines [2007]. The intervention overwrites the distribution of a given variable. In our example, a hard intervention $int_{\text{hard}}$ denoted by $h$ is
 
 \begin{equation}
     X_1^h \leftarrow \mathcal{U}(0,1)
@@ -171,7 +170,7 @@ The first type of intervention we consider is a hard intervention. This type of 
 \end{equation}
 \begin{equation}    
     X_4^h \leftarrow X_1^h - X_3^h + \mathcal{N}(0,1)
-\end{align}
+\end{equation}
 
 The equivalent causal graph can be seen in Figure 3b. We can see that the variable targeted by the intervention no longer has arrows coming in from its parents. This is because the causal link between the variable and its parents is broken by the intervention. Instead, its new parent is the intervention variable $I$. Note that the children of the variable remain unaffected. In mathematical terms,
 
@@ -182,6 +181,86 @@ The equivalent causal graph can be seen in Figure 3b. We can see that the variab
 Where we admit a slight abuse of notation, as $P(X$\|$I=\text{on})$ cannot be observed in the observational environment.
 
 The blinded randomised control trial is a hard intervention: the allocation of the drug is given by the intervening factor, and not standard medical considerations such as age and comorbidities.
+
+#### 2.ii.b. Soft interventions
+Soft interventions, or "parametric interventions"  Eberhardt and Scheines [2007], on the other hand keep the current causal structure intact, but modify its specifications.
+
+The intervention can take place in the variance of a variable as in Equation (2.ii.b.0) or in its relation to other variables as in Equation (2.ii.b.1), both depicted in Figure \ref{fig:int-soft}. In the example below, the conditional distributions of \{$X_1^{s_1}, X_2^{s_1}, X_4^{s_1}, X_1^{s_2}, X_2^{s_2}, X_4^{s_2}$\} remain the same as in the hard intervention example.
+
+
+\begin{equation}
+    X_3^{s_1} \leftarrow 2X_1^{s_1} + X_2^{s_1} + \mathcal{N}(-2,0.01) \qquad (2.ii.b.0)
+\end{equation}
+\begin{equation}    
+    X_3^{s_2} \leftarrow 10X_1^{s_2} + X_2^{s_2} + \mathcal{N}(0,1) \qquad (2.ii.b.1)
+\end{equation}
+
+
+More generally,
+\begin{equation}
+    P(X^e|\text{par}^e(X^e)) = P(X|\text{par}(X), I=\text{on})
+\end{equation}
+Although Eberhardt and Scheines [2007] only suggest it, we specify that $X$ is not independent of any subset of $\text{par}(X)$ given $I=$on. In order to keep the structure of the intervention types clean, we treat cases where the set of parents change separately.
+
+#### 2.ii.c. Semi-soft interventions
+
+Finally, we look to categorise interventions that alter the causal graph \textit{somewhat}.
+
+We introduce the semi-soft interventions, interventions that break only a subset of the parental relationships of a variable.
+\begin{equation}
+    P(X^e|\text{par}^e(X^e)) = P(X|\text{par}(X), I=\text{on})\qquad \emptyset\neq\text{par}^e(X)\subset\text{par}(X)
+\end{equation}
+Following the same assumptions as for examples in equations (2.ii.b.0) and (2.ii.b.1), and example of such intervention on $X_3$ is 
+\begin{equation}
+    X_3^{ss} \leftarrow X_2^{ss}  + \mathcal{N}(0,1)
+\end{equation}
+
+##### 2.ii.c.? Noise interventions
+
+Within soft intervention, a subclass of well-defined intervention stands out. In example (2.ii.b.0), relative relationship between $X_3$ and its parents remain constant: when $X_1$ increases, $X_3$ increases twice as much. However, the noise associated to $X_3$ changes. We attempt to identify this "noisy soft intervention" subclass with:
+\begin{equation}
+    P(X^e|\text{par}^e(X^e)) = P(X|\text{par}(X)) + P(z_I|I=\text{on})
+\end{equation}
+
+#### 2.ii.d. Generative Interventions
+
+Lastly, an intervention which was not considered by the literature we reviewed is an intervention that can augment the causal structure of the graph creating new dependencies. We call this type of interventions generative interventions. An example as seen in Figure 3e is as follows.
+
+\begin{equation} 
+    X_1^{g} \leftarrow \mathcal{U}(0,1)
+\end{equation}
+\begin{equation}    
+    X_2^{g} \leftarrow X_1^{g} + \mathcal{U}(-1,0)
+\end{equation}
+\begin{equation}    
+    X_3^{g} \leftarrow 2X_1^{g} + X_2^g + \mathcal{N}(0,1)
+\end{equation}
+\begin{equation}    
+    X_4^{g} \leftarrow X_1^{g} -2X_2^{g}- X_3^{g} + \mathcal{N}(0,1)
+\end{equation}
+
+Mathematically,
+\begin{equation}
+    P(X^e|\text{par}^e(X^e)) = P(X|\text{par}^e(X), I=\text{on})\qquad \text{par}^e(X)\supset\text{par}(X)
+\end{equation}
+Generative interventions are fundamentally different from hard, soft and semi-soft intervention as they add causal relationships which were not present in the observational setting. As such, they need to be handled with care if used for causal discovery.
+
+Following the student GPA example, a real world generative intervention would be to force students to study only when the weather is bad, adding a new causal connection between 'weather' and 'hours studied'.
+
+#### 2.ii.e. Discussion
+Although we designed the intervention classes to represent conceptually different types of action, these classes can be mixed to create more complex interventions.
+
+Moreover, the literature is not consistent on what is determined to be an intervention. Pearl [2010] only consider hard interventions, whereas Eberhardt and Scheines [2007] distinguish soft and hard interventions. It is unclear if they consider semi-soft interventions. Finally, Peters et al. [2016] considers semi-soft interventions to be hard interventions.
+
+### 2.iii. Causal discovery through interventions
+
+Similarly to how randomised trials are used to discover the efficiency of a drug, interventions and the environments they create can be used to unveil the causal structure of a system. For both of hard and soft interventions, assuming statistically relevant number of samples, Eberhardt and Scheines [2007] give bounds for how many of such interventions one needs to observe to do so.
+
+Namely, for both hard and soft interventions, if a single variable is intervened upon for each environment, then $d-1$ experiments are sufficient and sometimes necessary to learn the causal structure of a system of $d$ variables. The proof for hard interventions can be found in Eberhardt et al. [2006][^7], whereas the proof for soft interventions can be found in Eberhardt and Scheines [2007].
+
+On the other hand, if simultaneous and independent interventions are allowed, then the bound drops to $\log_2(d)+1$ for hard interventions, proven in Eberhardt et al. [2005] and to $1$ for soft interventions, proven in Eberhardt and Scheines [2007]. Note that in the case of soft interventions, the number of simultaneous interventions required in the environment is $d-1$.
+
+These results only hold for faithful, acyclic and causal sufficient systems and provide a comparison metric for the performance of the models covered in the next chapter. 
 
 ## Footnotes
 
@@ -197,4 +276,6 @@ The blinded randomised control trial is a hard intervention: the allocation of t
 
 [^6]: [Pearl, J. [2010], ‘An introduction to causal inference’, The International Journal of Biostatistics 6, DOI: 10.2202/1557–4679.1203.](http://www.bepress.com/ijb/vol6/iss2/7/)
 
-[^7]: [Eberhardt, F. and Scheines, R. [2007], ‘Interventions and causal inference’, Philosophy of Science 74(5), 981–995.](http://www.jstor.org/stable/10.1086/525638)
+[^7]: [Eberhardt, F., Glymour, C. and Scheines, R. [2006], N-1 experiments suffice to determine the causal relations among n variables, in ‘Innovations in machine learning’, Springer, pp. 97–112.](https://www.ml.cmu.edu/research/dap-papers/eberhardt kdd project1.pdf)
+
+[^8]: [Eberhardt, F., Glymour, C. and Scheines, R. [2005], On the number of experiments sufficient and in the worst case necessary to identify all causal relations among n variables, in ‘Proceedings of the Twenty-First Conference on Uncertainty in Artificial Intelligence’, pp. 178–184.](https://arxiv.org/abs/1207.1389)
