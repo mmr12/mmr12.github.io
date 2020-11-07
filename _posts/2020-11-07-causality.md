@@ -131,6 +131,7 @@ Having defined the causal graph, we now describe how different environments are 
 We call an intervention a variation on a causal graph. It can either be a natural or a human imposed variation. A common example of a human made intervention is the randomised control trial, where a drug is given blindly with equal probability to two different groups of people. Given the random blind assignment, the group of patients receiving the drug has similar characteristics to the group of patients not receiving the drug. The resulting relative improvement in health can therefore only attributed to the drug. The administration of the drug is an intervention on the environment.
 
 Formally,
+
 __*Definition*__: Consider an SEM $\mathcal{C}=(S, N)$. An intervention $int_e$ on $\mathcal{C}$ consists of replacing one or several of its structural equations to obtain an intervened SEM $\mathcal{C}^e=(S^e, N^e)$ with structural equations
 \begin{equation}
     S^e_i:=X^e_i \leftarrow f_i^e(\text{par}^e(X^e), N_i^e)
