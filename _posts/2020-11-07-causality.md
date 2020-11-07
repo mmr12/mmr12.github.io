@@ -160,6 +160,24 @@ __*Figure 3: Interventions on Causal Graphs*__
 __*Figure 3: Interventions on Causal Graphs*__
 
 #### Hard interventions
+The first type of intervention we consider is a hard intervention. This type of intervention is also called a "do-intervention" Pearl [2010][^6] and "structural intervention" Eberhardt and Scheines [2007][^7]. The intervention overwrites the distribution of a given variable. In our example, a hard intervention $int_{\text{hard}}$ denoted by $h$ is
+
+\begin{align}
+    X_1^h &\leftarrow \mathcal{U}(0,1)\\
+    X_2^h &\leftarrow X_1^h + \mathcal{U}(-1,0)\\
+    X_3^h &\leftarrow Bernoulli \{0,1\}\\
+    X_4^h &\leftarrow X_1^h - X_3^h + \mathcal{N}(0,1)
+\end{align}
+
+The equivalent causal graph can be seen in Figure 3b. We can see that the variable targeted by the intervention no longer has arrows coming in from its parents. This is because the causal link between the variable and its parents is broken by the intervention. Instead, its new parent is the intervention variable $I$. Note that the children of the variable remain unaffected. In mathematical terms,
+
+\begin{equation}
+    P(X^e|\text{par}^e(X^e)) = P(X|I=\text{on})
+\end{equation}
+
+Where we admit a slight abuse of notation, as $P(X$\|$I=\text{on})$ cannot be observed in the observational environment.
+
+The blinded randomised control trial is a hard intervention: the allocation of the drug is given by the intervening factor, and not standard medical considerations such as age and comorbidities.
 
 ## Footnotes
 
@@ -172,3 +190,7 @@ __*Figure 3: Interventions on Causal Graphs*__
 [^4]: [Dawid, A. P. [2010], Beware of the dag!, in I. Guyon, D. Janzing and B. Scho ̈lkopf, eds, ‘Proceedings of Workshop on Causality: Objectives and Assessment at NIPS 2008’, Vol. 6 of Proceedings of Machine Learning Research, PMLR, Whistler, Canada, pp. 59– 86.](http://proceedings.mlr.press/v6/dawid10a.html)
 
 [^5]: [Eberhardt, F. and Scheines, R. [2007], ‘Interventions and causal inference’, Philosophy of Science 74(5), 981–995.](http://www.jstor.org/stable/10.1086/525638)
+
+[^6]: [Pearl, J. [2010], ‘An introduction to causal inference’, The International Journal of Biostatistics 6, DOI: 10.2202/1557–4679.1203.](http://www.bepress.com/ijb/vol6/iss2/7/)
+
+[^7]: [Eberhardt, F. and Scheines, R. [2007], ‘Interventions and causal inference’, Philosophy of Science 74(5), 981–995.](http://www.jstor.org/stable/10.1086/525638)
