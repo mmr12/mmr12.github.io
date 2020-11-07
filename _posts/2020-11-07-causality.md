@@ -25,7 +25,7 @@ How can we identify and leverage invariant relationships to create more robust p
 ### Cause and effect
 In order to answer the question, consider what makes the relationship between the number of hours studied and a student's GPA. In universal wisdom, if a student studies for their course then they will achieve high grades. From a *cause and effect* optic, we intuitively know that the amount of time worked (H) is the cause of the student grade (G). If we were to doubt our intuition, a simple timeline argument supports the claim. As the studying happens before the exam, the exam cannot be the cause of the studying. We say that H is the cause of G. In addition, students with higher GPA are more likely to get higher paying jobs (S). Hence we claim that G causes S. The relationship between the three variables is depicted in Figure 1, where arrows represent causal relationships. A more in depth explanation of such causal graphs takes place in Section *Structural Equation Model and causal graphs*. 
 
-![Student GPA causal graph](../images/2020-11-07-causality/ISO_figures-Page-1-intro-fig.jpg)
+![Student GPA causal graph](../images/2020/11/07/ISO_figures-Page-1-intro-fig.jpg)
 __*Figure 1: Student GPA causal graph*__
 
 What are the defining factors of the causal relationship between H and G? We will answer this question in Section *Causal parents*. In Section *Interventions* we explain how environments may change, whereas in the next Section *Invariant predictors* we discuss two methods to utilise the invariance of causal relationships to build robust predictive models across environments.
@@ -91,6 +91,20 @@ The link between SEM and probability follows from the former's definition and is
  __*Definition:*__
 *A variable $X_i$ is independent of its non-descendants given its parents par$(X_i)$.* 
 
+#### SEM and Bayesian Networks
+Although causal graphs can look similar to Bayesian networks, probabilistic networks and causal networks are not interchangeable. Probabilistic networks relate to the joint distribution of variables present in the system. Edges from variable nodes have the single use to indicate the probabilistic independences extracted from the data. However, the orientation of the arrows bare no significance and cannot be interpreted in a causal manner. As an example inspired from  Dawid [2010][^4], Figure 2 shows three Markov equivalent graphs, that graphs they can all be interpreted similarly in a probabilistic context. By d-separation
+, 'first salary' is independent from 'weekly hours studying' given `GPA average'. However only one set of arrows defines the natural relation between the three variables, that is their causal relationship shown in Figure 1.
+
+![Three Markov equivalent graphs](../images/2020/11/07/Fig2.png)
+__*Figure 2: Three Markov equivalent graphs*__
+
+|In Bayesian networks theory, two variables are independent if they are d-separated. Conditions for d-separation are:
+    - $X\leftarrow Z\leftarrow Y$ and $Z$ is observed
+    - $X \rightarrow Z \rightarrow Y$ and $Z$ is observed
+    - $X\leftarrow Z \rightarrow Y$ and $Z$ is observed
+    - $X\rightarrow Z \leftarrow Y$ and all of $Z$ and $Z$'s descendants are unobserved|
+
+If we assume the causal graph will be one of the Markov equivalent graphs, we cannot know which equivalent graph that is. On the other hand, two variables might be independent in probability but linked in causality. As an example, take the relationship between weight and exercise. Exercise consumes calories which decreases weight, but also increases appetite which increases weight. If in a dataset collected the causal effect of exercise on weight and appetite cancel each other then one would observe that weight and exercise are probabilistically independent.
 ## Footnotes
 
 [^1]: [Peters, J., Bü̈hlmann, P. and Meinshausen, N. [2016], ‘Causal inference by using invariant prediction: identification and confidence intervals’, Journal of the Royal Statistical Society: Series B (Statistical Methodology) 78(5), 947–1012.](https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167)
@@ -98,3 +112,5 @@ The link between SEM and probability follows from the former's definition and is
 [^2]: [Arjovsky, M., Bottou, L., Gulrajani, I. and Lopez-Paz, D. [2019], ‘Invariant risk mini- mization’, arXiv preprint arXiv:1907.02893 . Version v3.](https://arxiv.org/abs/1907.02893)
 
 [^3]: [Scheines, R. [1997], ‘An introduction to causal inference’.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.118.3002)
+
+[^4]: [Dawid, A. P. [2010], Beware of the dag!, in I. Guyon, D. Janzing and B. Scho ̈lkopf, eds, ‘Proceedings of Workshop on Causality: Objectives and Assessment at NIPS 2008’, Vol. 6 of Proceedings of Machine Learning Research, PMLR, Whistler, Canada, pp. 59– 86.](http://proceedings.mlr.press/v6/dawid10a.html)
