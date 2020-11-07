@@ -141,16 +141,16 @@ The variable $X^e$ is intervened if $S_i\neq S_i^e$.
 In order to illustrate the different types of interventions, let us consider an example. The following equations represent the state of a system in its observational environment. 
 
 \begin{equation}
-    X_1 &\leftarrow \mathcal{U}(0,1)
+    X_1 \leftarrow \mathcal{U}(0,1)
 \end{equation}
 \begin{equation}
-    X_2 &\leftarrow X_1 + \mathcal{U}(-1,0)
+    X_2 \leftarrow X_1 + \mathcal{U}(-1,0)
 \end{equation}
 \begin{equation}
-    X_3 &\leftarrow 2X_1 + X_2 + \mathcal{N}(0,1)
+    X_3 \leftarrow 2X_1 + X_2 + \mathcal{N}(0,1)
 \end{equation}
 \begin{equation}
-    X_4 &\leftarrow X_1 - X_3 + \mathcal{N}(0,1)
+    X_4 \leftarrow X_1 - X_3 + \mathcal{N}(0,1)
 \end{equation}
 Set an intervention $int_e$ to be represented by a variable $I$. Such that $I$ can either be activated or deactivated. Figure 3a shows the causal graph for the example when $I$ is deactivated.
 
