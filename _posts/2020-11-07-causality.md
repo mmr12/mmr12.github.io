@@ -64,6 +64,37 @@ Or, as Peters et al. [2016] note [^1]:
 \label{chap:causality-sec:SEM--subsec:causal-graph}
 To describe the knowledge of all causal relationships present in a given universe of variables $\{X_1,...,X_d\}$, we introduce the concept of Structural Equation Model (SEM).
 
+*__Definition: __*
+*An SEM $\mathcal{C}:= (S,N)$ governing the random vector $X:=(X_1,...,X_d)$ is a set of structural equations*
+\begin{equation}
+    S_i: \,\,X_i \leftarrow f_i(\text{par}(X_i), N_i)
+\end{equation}
+*where $\text{par}(X_i)\subseteq\{X_1,...,X_d\}\setminus\{X_i\}$ are called parents of $X_i$, and $N_i$ are independent noise random variables. We say that "$X_i$ causes $X_j$" if $X_i\in\text{par}(X_j)$. We call causal graph of $X$ the graph obtained by drawing a node for each $X_i$ and an edge from $X_i$ to $X_j$ if $X_i\in\text{par}(X_j)$ [Arjovsky et al., 2019][^2].*
+
+For linear Gaussian noise models such as the ones described by Peters et al. [2016][^1], we can formulate SEMs specifically as follows.
+
+*__Definition: __*
+*A Gaussian SEM $\mathcal{C}:= (S,N)$ governing the random vector $X:=(X_1,...,X_d)$ is a set of structural equations* 
+\begin{align}
+    S_i:\,\, &X_i \leftarrow \sum_{k\neq i}\beta_{i,k}X_k + \epsilon_i& &i=1,..,p\\
+    &\epsilon_i\sim\mathcal{N}(0, \sigma^2_i)& &i=1,..,p
+\end{align}
+*where $\epsilon_i$ are independent noise random variables.
+The parents of $X_i$ are given by*
+\begin{equation}
+    \text{par}(X_i) = \{k\in\{1,..,p\}\setminus \{i\}: \beta_{i,k}\neq 0\}
+\end{equation}
+
+Note here that $\beta_{i,k}$ and $\beta_{k,i}$ are distinct.
+
+The link between SEM and probability follows from the former's definition and is given by the Causal Markov Condition [Scheines, 1997][^3]
+*__Definition: __*
+*A variable $X_i$ is independent of its non-descendants given its parents par$(X_i)$.* 
+
 ## Footnotes
 
 [^1]: [Peters, J., Bü̈hlmann, P. and Meinshausen, N. [2016], ‘Causal inference by using invariant prediction: identification and confidence intervals’, Journal of the Royal Statistical Society: Series B (Statistical Methodology) 78(5), 947–1012.](https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167)
+
+[^2]: [Arjovsky, M., Bottou, L., Gulrajani, I. and Lopez-Paz, D. [2019], ‘Invariant risk mini- mization’, arXiv preprint arXiv:1907.02893 . Version v3.](https://arxiv.org/abs/1907.02893)
+
+[^3]: [Scheines, R. [1997], ‘An introduction to causal inference’.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.118.3002)
