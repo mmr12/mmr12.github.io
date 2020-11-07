@@ -160,11 +160,17 @@ __*Figure 3: Interventions on Causal Graphs*__
 #### Hard interventions
 The first type of intervention we consider is a hard intervention. This type of intervention is also called a "do-intervention" Pearl [2010][^6] and "structural intervention" Eberhardt and Scheines [2007][^7]. The intervention overwrites the distribution of a given variable. In our example, a hard intervention $int_{\text{hard}}$ denoted by $h$ is
 
-\begin{align}
-    X_1^h &\leftarrow \mathcal{U}(0,1)\\
-    X_2^h &\leftarrow X_1^h + \mathcal{U}(-1,0)\\
-    X_3^h &\leftarrow Bernoulli \{0,1\}\\
-    X_4^h &\leftarrow X_1^h - X_3^h + \mathcal{N}(0,1)
+\begin{equation}
+    X_1^h \leftarrow \mathcal{U}(0,1)
+\end{equation}
+\begin{equation}
+    X_2^h \leftarrow X_1^h + \mathcal{U}(-1,0)
+\end{equation}
+\begin{equation}
+    X_3^h \leftarrow Bernoulli \{0,1\}
+\end{equation}
+\begin{equation}    
+    X_4^h \leftarrow X_1^h - X_3^h + \mathcal{N}(0,1)
 \end{align}
 
 The equivalent causal graph can be seen in Figure 3b. We can see that the variable targeted by the intervention no longer has arrows coming in from its parents. This is because the causal link between the variable and its parents is broken by the intervention. Instead, its new parent is the intervention variable $I$. Note that the children of the variable remain unaffected. In mathematical terms,
