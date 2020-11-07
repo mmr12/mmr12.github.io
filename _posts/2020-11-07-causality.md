@@ -25,7 +25,7 @@ How can we identify and leverage invariant relationships to create more robust p
 In order to answer the question, consider what makes the relationship between the number of hours studied and a student's GPA. In universal wisdom, if a student studies for their course then they will achieve high grades. From a *cause and effect* optic, we intuitively know that the amount of time worked (H) is the cause of the student grade (G). If we were to doubt our intuition, a simple timeline argument supports the claim. As the studying happens before the exam, the exam cannot be the cause of the studying. We say that H is the cause of G. In addition, students with higher GPA are more likely to get higher paying jobs (S). Hence we claim that G causes S. The relationship between the three variables is depicted in Figure 1, where arrows represent causal relationships. A more in depth explanation of such causal graphs takes place in Section *Structural Equation Model and causal graphs*. 
 
 ![](../images/logo.png)
-![Student GPA causal graph](../images/2020/11/07/ISO_figures-Page-1-intro-fig.jpg)
+![Student GPA causal graph](2020/11/07/ISO_figures-Page-1-intro-fig.jpg)
 __*Figure 1: Student GPA causal graph*__
 
 What are the defining factors of the causal relationship between H and G? We will answer this question in Section *Causal parents*. In Section *Interventions* we explain how environments may change, whereas in the next Section *Invariant predictors* we discuss two methods to utilise the invariance of causal relationships to build robust predictive models across environments.
@@ -98,7 +98,7 @@ The link between SEM and probability follows from the former's definition and is
 Although causal graphs can look similar to Bayesian networks, probabilistic networks and causal networks are not interchangeable. Probabilistic networks relate to the joint distribution of variables present in the system. Edges from variable nodes have the single use to indicate the probabilistic independences extracted from the data. However, the orientation of the arrows bare no significance and cannot be interpreted in a causal manner. As an example inspired from  Dawid [2010][^4], Figure 2 shows three Markov equivalent graphs, that graphs they can all be interpreted similarly in a probabilistic context. By d-separation
 , 'first salary' is independent from 'weekly hours studying' given `GPA average'. However only one set of arrows defines the natural relation between the three variables, that is their causal relationship shown in Figure 1.
 
-![Three Markov equivalent graphs](../images/2020/11/07/Fig2.png)
+![Three Markov equivalent graphs](2020/11/07/Fig2.png)
 __*Figure 2: Three Markov equivalent graphs*__
 
 | 
