@@ -53,7 +53,7 @@ Assume a student transfers from university A to university B, where university A
 \label{eq:parent-inv}
 \end{equation}
 
-This property is not limited to observational data. Suppose we forcefully intervened on the difficulty of the exam by increasing considerably its complexity. All other factors remain constant except the exam difficulty. The relationship between the exam difficulty and the GPA would not be broken, rather we would observe a different part of its distribution. Hence equality (\ref{eq:parent-inv}) would still hold. This is in contrast with the first salary example discussed in the introduction. In the latter, the distribution $P(G|S)$ would vary from one university to the other.
+This property is not limited to observational data. Suppose we forcefully intervened on the difficulty of the exam by increasing considerably its complexity. All other factors remain constant except the exam difficulty. The relationship between the exam difficulty and the GPA would not be broken, rather we would observe a different part of its distribution. Hence equality (\ref{eq:parent-inv}) would still hold. This is in contrast with the first salary example discussed in the introduction. In the latter, the distribution $$P(G\|S)$$ would vary from one university to the other.
 
 Although equality (\ref{eq:parent-inv}) holds in most scenarios, a specific type of intervention invalidates it. Suppose we intervene on the exam, this time by increasing the score of all students by 30\%. Then the same student having studied the same amount of time and being presented with the same exam will achieve a different GPA.
 
