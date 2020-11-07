@@ -96,17 +96,17 @@ The link between SEM and probability follows from the former's definition and is
 
 #### SEM and Bayesian Networks
 Although causal graphs can look similar to Bayesian networks, probabilistic networks and causal networks are not interchangeable. Probabilistic networks relate to the joint distribution of variables present in the system. Edges from variable nodes have the single use to indicate the probabilistic independences extracted from the data. However, the orientation of the arrows bare no significance and cannot be interpreted in a causal manner. As an example inspired from  Dawid [2010][^4], Figure 2 shows three Markov equivalent graphs, that graphs they can all be interpreted similarly in a probabilistic context. By d-separation
-, 'first salary' is independent from 'weekly hours studying' given `GPA average'. However only one set of arrows defines the natural relation between the three variables, that is their causal relationship shown in Figure 1.
+, 'first salary' is independent from 'weekly hours studying' given 'GPA average'. However only one set of arrows defines the natural relation between the three variables, that is their causal relationship shown in Figure 1.
 
 ![Three Markov equivalent graphs](/images/2020/11/07/Fig2.png)
 __*Figure 2: Three Markov equivalent graphs*__
  
 In Bayesian networks theory, two variables are independent if they are d-separated. Conditions for d-separation are:
 
-    - $X\leftarrow Z\leftarrow Y$ and $Z$ is observed
-    - $X \rightarrow Z \rightarrow Y$ and $Z$ is observed
-    - $X\leftarrow Z \rightarrow Y$ and $Z$ is observed
-    - $X\rightarrow Z \leftarrow Y$ and all of $Z$ and $Z$'s descendants are unobserved
+- $X\leftarrow Z\leftarrow Y$ and $Z$ is observed
+- $X \rightarrow Z \rightarrow Y$ and $Z$ is observed
+- $X\leftarrow Z \rightarrow Y$ and $Z$ is observed
+- $X\rightarrow Z \leftarrow Y$ and all of $Z$ and $Z$'s descendants are unobserved
 
 
 If we assume the causal graph will be one of the Markov equivalent graphs, we cannot know which equivalent graph that is. On the other hand, two variables might be independent in probability but linked in causality. As an example, take the relationship between weight and exercise. Exercise consumes calories which decreases weight, but also increases appetite which increases weight. If in a dataset collected the causal effect of exercise on weight and appetite cancel each other then one would observe that weight and exercise are probabilistically independent.
@@ -139,15 +139,23 @@ The variable $X^e$ is intervened if $S_i\neq S_i^e$.
 
 In order to illustrate the different types of interventions, let us consider an example. The following equations represent the state of a system in its observational environment. 
 
-\begin{align}
-    X_1 &\leftarrow \mathcal{U}(0,1)\\
-    X_2 &\leftarrow X_1 + \mathcal{U}(-1,0)\\
-    X_3 &\leftarrow 2X_1 + X_2 + \mathcal{N}(0,1)\\
+\begin{equation}
+    X_1 &\leftarrow \mathcal{U}(0,1)
+\end{equation}
+\begin{equation}
+    X_2 &\leftarrow X_1 + \mathcal{U}(-1,0)
+\end{equation}
+\begin{equation}
+    X_3 &\leftarrow 2X_1 + X_2 + \mathcal{N}(0,1)
+\end{equation}
+\begin{equation}
     X_4 &\leftarrow X_1 - X_3 + \mathcal{N}(0,1)
-\end{align}
+\end{equation}
 Set an intervention $int_e$ to be represented by a variable $I$. Such that $I$ can either be activated or deactivated. Figure 3a shows the causal graph for the example when $I$ is deactivated.
 
 ![Interventions on Causal Graphs](/images/2020/11/07/Fig2.png)
+__*Figure 3: Interventions on Causal Graphs*__
+![](/images/2020/11/07/Fig2.png)
 __*Figure 3: Interventions on Causal Graphs*__
 
 #### Hard interventions
