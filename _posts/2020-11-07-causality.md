@@ -2,7 +2,7 @@
 
 This is the first chapter of a series of two, aiming to discuss tools to leverage invariances in a dataset to build robust predictors. 
 
-In this first chapter we introduce the language of causality, linking the universe of `cause and effect' to probability theory. We define the probabilistic role of causal parents and formalise the concepts of causal invariance and interventional environments.
+In this first chapter we introduce the language of causality, linking the universe of 'cause and effect' to probability theory. We define the probabilistic role of causal parents and formalise the concepts of causal invariance and interventional environments.
 Here's the table of contents:
 
 1. TOC
@@ -35,19 +35,25 @@ What are the defining factors of the causal relationship between H and G? We wil
 #### Causal parents
 Following the example in the introduction, the GPA of a student is caused by the number of hours they spent studying. If the new variable 'weather' ($$W$$) is introduced, we can safely state that overall the weather has no impact on a student GPA, that is the same number of hours of study will result in the same GPA. Translating this statement in mathematical terms with variables $H$, $G$ and $W$ we obtain:
 
-$$P(G|H, W) = P(G|H) $$
+$$P(G|H, W) = P(G|H) $$ (1)
 
 Thinking more broadly about our observational setting, the time spent studying is not the only factor affecting a student GPA. For example the student stress and difficulty of the exam are other causes of their GPA. Let us collect all variables that have a direct effect on $G$. These are all the causal parents of $G$, denoted $\text{par}(G)$. In our example, assume $\text{par}(G)=\{$ "weekly hours studied", "stress", "exam difficulty"$\}$. Similarly we can define the children of a variable as all the variables that are directly affected by it, and the ancestors and descendants of a variable as all the indirect causes and indirect effects of a variable. We can claim
 
-$$P(G|\,\text{par}(G), Z) = P(G|\,\text{par}(G))\quad\forall Z\notin \text{par}(G)  $$
+$$P(G|\,\text{par}(G), Z) = P(G|\,\text{par}(G))\quad\forall Z\notin \text{par}(G)  $$ (2)
 
 
 Assume a student transfers from university A to university B, where university A and B have standardised examinations, changing the observational setting. Denote by $e_1$ the first environment, and $e_2$ the second. Regardless of the location, the same student will achieve the same GPA. More generally, parents of a variable have the same effect on the variable. 
 
-$$P(G^{e_1}|\,\text{par}^{e_1}(G)) = P(G^{e_2}|\,\text{par}^{e_2}(G))$$
-\begin{equation}
-    P(G^{e_1}|\,\text{par}^{e_1}(G)) = P(G^{e_2}|\,\text{par}^{e_2}(G))
-\label{eq:parent-inv}
-\end{equation}
+$$P(G^{e_1}|\,\text{par}^{e_1}(G)) = P(G^{e_2}|\,\text{par}^{e_2}(G))$$ (3)
 
-This property is not limited to observational data. Suppose we forcefully intervened on the difficulty of the exam by increasing considerably its complexity. All other factors remain constant except the exam difficulty. The relationship between the exam difficulty and the GPA would not be broken, rather we would observe a different part of its distribution. Hence equality \ref{eq:parent-inv} would still hold. This is in contrast with the first salary example discussed in the introduction. In the latter, the distribution $P(G|S)$ would vary from one university to the other.
+This property is not limited to observational data. Suppose we forcefully intervened on the difficulty of the exam by increasing considerably its complexity. All other factors remain constant except the exam difficulty. The relationship between the exam difficulty and the GPA would not be broken, rather we would observe a different part of its distribution. Hence equality (3) would still hold. This is in contrast with the first salary example discussed in the introduction. In the latter, the distribution $P(G|S)$ would vary from one university to the other.
+
+Although equality (3) holds in most scenarios, a specific type of intervention invalidates it. Suppose we intervene on the exam, this time by increasing the score of all students by 30\%. Then the same student having studied the same amount of time and being presented with the same exam will achieve a different GPA.
+
+Or, as Peters et al. [2016] note [^1]:
+>If we consider all `direct causes' of a target variable of interest, then the conditional distribution of the target given the direct causes will not change when we interfere experimentally with all other variables in the model except the target itself.[Peters et al., 2016, p. 948][^1]
+
+## Footnotes
+
+[^1]: Peters, J., Bü̈hlmann, P. and Meinshausen, N. [2016], ‘Causal inference by using invariant prediction: identification and confidence intervals’, Journal of the Royal Statistical Society: Series B (Statistical Methodology) 78(5), 947–1012.
+URL: https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167
