@@ -25,7 +25,7 @@ How can we identify and leverage invariant relationships to create more robust p
 In order to answer the question, consider what makes the relationship between the number of hours studied and a student's GPA. In universal wisdom, if a student studies for their course then they will achieve high grades. From a *cause and effect* optic, we intuitively know that the amount of time worked (H) is the cause of the student grade (G). If we were to doubt our intuition, a simple timeline argument supports the claim. As the studying happens before the exam, the exam cannot be the cause of the studying. We say that H is the cause of G. In addition, students with higher GPA are more likely to get higher paying jobs (S). Hence we claim that G causes S. The relationship between the three variables is depicted in Figure 1, where arrows represent causal relationships. A more in depth explanation of such causal graphs takes place in Section *Structural Equation Model and causal graphs*. 
 
 ![](../images/logo.png)
-![Student GPA causal graph](2020/11/07/ISO_figures-Page-1-intro-fig.jpg)
+![Student GPA causal graph](../images/2020/11/07/ISO_figures-Page-1-intro-fig.jpg)
 __*Figure 1: Student GPA causal graph*__
 
 What are the defining factors of the causal relationship between H and G? We will answer this question in Section *Causal parents*. In Section *Interventions* we explain how environments may change, whereas in the next Section *Invariant predictors* we discuss two methods to utilise the invariance of causal relationships to build robust predictive models across environments.
@@ -98,10 +98,9 @@ The link between SEM and probability follows from the former's definition and is
 Although causal graphs can look similar to Bayesian networks, probabilistic networks and causal networks are not interchangeable. Probabilistic networks relate to the joint distribution of variables present in the system. Edges from variable nodes have the single use to indicate the probabilistic independences extracted from the data. However, the orientation of the arrows bare no significance and cannot be interpreted in a causal manner. As an example inspired from  Dawid [2010][^4], Figure 2 shows three Markov equivalent graphs, that graphs they can all be interpreted similarly in a probabilistic context. By d-separation
 , 'first salary' is independent from 'weekly hours studying' given `GPA average'. However only one set of arrows defines the natural relation between the three variables, that is their causal relationship shown in Figure 1.
 
-![Three Markov equivalent graphs](2020/11/07/Fig2.png)
+![Three Markov equivalent graphs](/images/2020/11/07/Fig2.png)
 __*Figure 2: Three Markov equivalent graphs*__
-
-| 
+ 
 In Bayesian networks theory, two variables are independent if they are d-separated. Conditions for d-separation are:
 
     - $X\leftarrow Z\leftarrow Y$ and $Z$ is observed
@@ -109,7 +108,6 @@ In Bayesian networks theory, two variables are independent if they are d-separat
     - $X\leftarrow Z \rightarrow Y$ and $Z$ is observed
     - $X\rightarrow Z \leftarrow Y$ and all of $Z$ and $Z$'s descendants are unobserved
 
-|
 
 If we assume the causal graph will be one of the Markov equivalent graphs, we cannot know which equivalent graph that is. On the other hand, two variables might be independent in probability but linked in causality. As an example, take the relationship between weight and exercise. Exercise consumes calories which decreases weight, but also increases appetite which increases weight. If in a dataset collected the causal effect of exercise on weight and appetite cancel each other then one would observe that weight and exercise are probabilistically independent.
 
@@ -128,6 +126,32 @@ A criticism of assuming faithfulness is that up to our knowledge, there is no me
 
 
 Having defined the causal graph, we now describe how different environments are created.
+
+### Interventions
+We call an intervention a variation on a causal graph. It can either be a natural or a human imposed variation. A common example of a human made intervention is the randomised control trial, where a drug is given blindly with equal probability to two different groups of people. Given the random blind assignment, the group of patients receiving the drug has similar characteristics to the group of patients not receiving the drug. The resulting relative improvement in health can therefore only attributed to the drug. The administration of the drug is an intervention on the environment.
+
+Formally,
+__*Definition*__: Consider an SEM $\mathcal{C}=(S, N)$. An intervention $int_e$ on $\mathcal{C}$ consists of replacing one or several of its structural equations to obtain an intervened SEM $\mathcal{C}^e=(S^e, N^e)$ with structural equations
+\begin{equation}
+    S^e_i:=X^e_i \leftarrow f_i^e(\text{par}^e(X^e), N_i^e)
+\end{equation}
+The variable $X^e$ is intervened if $S_i\neq S_i^e$.
+
+In order to illustrate the different types of interventions, let us consider an example. The following equations represent the state of a system in its observational environment. 
+
+\begin{align}
+    X_1 &\leftarrow \mathcal{U}(0,1)\\
+    X_2 &\leftarrow X_1 + \mathcal{U}(-1,0)\\
+    X_3 &\leftarrow 2X_1 + X_2 + \mathcal{N}(0,1)\\
+    X_4 &\leftarrow X_1 - X_3 + \mathcal{N}(0,1)
+\end{align}
+Set an intervention $int_e$ to be represented by a variable $I$. Such that $I$ can either be activated or deactivated. Figure 3a shows the causal graph for the example when $I$ is deactivated.
+
+![Interventions on Causal Graphs](/images/2020/11/07/Fig2.png)
+__*Figure 3: Interventions on Causal Graphs*__
+
+#### Hard interventions
+
 ## Footnotes
 
 [^1]: [Peters, J., Bü̈hlmann, P. and Meinshausen, N. [2016], ‘Causal inference by using invariant prediction: identification and confidence intervals’, Journal of the Royal Statistical Society: Series B (Statistical Methodology) 78(5), 947–1012.](https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167)
