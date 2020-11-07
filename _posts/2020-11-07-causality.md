@@ -25,7 +25,7 @@ How can we identify and leverage invariant relationships to create more robust p
 In order to answer the question, consider what makes the relationship between the number of hours studied and a student's GPA. In universal wisdom, if a student studies for their course then they will achieve high grades. From a *cause and effect* optic, we intuitively know that the amount of time worked (H) is the cause of the student grade (G). If we were to doubt our intuition, a simple timeline argument supports the claim. As the studying happens before the exam, the exam cannot be the cause of the studying. We say that H is the cause of G. In addition, students with higher GPA are more likely to get higher paying jobs (S). Hence we claim that G causes S. The relationship between the three variables is depicted in Figure 1, where arrows represent causal relationships. A more in depth explanation of such causal graphs takes place in Section *Structural Equation Model and causal graphs*. 
 
 ![](../images/logo.png)
-![Student GPA causal graph](../images/2020/11/07/ISO_figures-Page-1-intro-fig.jpg)
+![Student GPA causal graph](../images/2020/11/07/Fig1.jpg)
 __*Figure 1: Student GPA causal graph*__
 
 What are the defining factors of the causal relationship between H and G? We will answer this question in Section *Causal parents*. In Section *Interventions* we explain how environments may change, whereas in the next Section *Invariant predictors* we discuss two methods to utilise the invariance of causal relationships to build robust predictive models across environments.
@@ -154,9 +154,7 @@ In order to illustrate the different types of interventions, let us consider an 
 \end{equation}
 Set an intervention $int_e$ to be represented by a variable $I$. Such that $I$ can either be activated or deactivated. Figure 3a shows the causal graph for the example when $I$ is deactivated.
 
-![Interventions on Causal Graphs](/images/2020/11/07/Fig2.png)
-__*Figure 3: Interventions on Causal Graphs*__
-![](/images/2020/11/07/Fig2.png)
+![Interventions on Causal Graphs](/images/2020/11/07/Fig3.png)
 __*Figure 3: Interventions on Causal Graphs*__
 
 #### Hard interventions
