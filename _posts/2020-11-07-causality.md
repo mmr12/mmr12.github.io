@@ -1,4 +1,4 @@
-# This is the title
+# A little introduction to causality
 
 Here's the table of contents:
 
