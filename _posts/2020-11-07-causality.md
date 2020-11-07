@@ -63,18 +63,18 @@ Or, as Peters et al. [2016] note [^1]:
 #### Structural Equation Model and causal graphs
 To describe the knowledge of all causal relationships present in a given universe of variables $\{X_1,...,X_d\}$, we introduce the concept of Structural Equation Model (SEM).
 
-| __*Definition:*__
+ __*Definition:*__
 *An SEM $\mathcal{C}:= (S,N)$ governing the random vector $X:=(X_1,...,X_d)$ is a set of structural equations*
 \begin{equation}
     S_i: \,\,X_i \leftarrow f_i(\text{par}(X_i), N_i)
 \end{equation}
-*where $\text{par}(X_i)\subseteq{X_1,...,X_d}\setminus{X_i}$ are called parents of $X_i$, and $N_i$ are independent noise random variables.* 
+*where $\text{par}(X_i)\subseteq{% raw %}{{% endraw %}X_1,...,X_d{% raw %}}{% endraw %}\setminus{% raw %}{{% endraw %}X_i{% raw %}}{% endraw %}$ are called parents of $X_i$, and $N_i$ are independent noise random variables.* 
 
-*We say that "$X_i$ causes $X_j$" if $X_i\in\text{par}(X_j)$. We call causal graph of $X$ the graph obtained by drawing a node for each $X_i$ and an edge from $X_i$ to $X_j$ if $X_i\in\text{par}(X_j)$ [Arjovsky et al., 2019][^2].* |
+*We say that "$X_i$ causes $X_j$" if $X_i\in\text{par}(X_j)$. We call causal graph of $X$ the graph obtained by drawing a node for each $X_i$ and an edge from $X_i$ to $X_j$ if $X_i\in\text{par}(X_j)$ [Arjovsky et al., 2019][^2].* 
 
 For linear Gaussian noise models such as the ones described by Peters et al. [2016][^1], we can formulate SEMs specifically as follows.
 
-| __*Definition:*__
+ __*Definition:*__
 *A Gaussian SEM $\mathcal{C}:= (S,N)$ governing the random vector $X:=(X_1,...,X_d)$ is a set of structural equations* 
 
 \begin{align}
@@ -87,13 +87,13 @@ The parents of $X_i$ are given by*
 
 \begin{equation}
     \text{par}(X_i) = \{k\in\{1,..,p\}\setminus \{i\}: \beta_{i,k}\neq 0\}
-\end{equation} |
+\end{equation} 
 
 Note here that $\beta_{i,k}$ and $\beta_{k,i}$ are distinct.
 
 The link between SEM and probability follows from the former's definition and is given by the Causal Markov Condition [Scheines, 1997][^3]
-| __*Definition:*__
-*A variable $X_i$ is independent of its non-descendants given its parents par$(X_i)$.* | 
+ __*Definition:*__
+*A variable $X_i$ is independent of its non-descendants given its parents par$(X_i)$.* 
 
 ## Footnotes
 
