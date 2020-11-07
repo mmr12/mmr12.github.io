@@ -26,7 +26,7 @@ How can we identify and leverage invariant relationships to create more robust p
 In order to answer the question, consider what makes the relationship between the number of hours studied and a student's GPA. In universal wisdom, if a student studies for their course then they will achieve high grades. From a *cause and effect* optic, we intuitively know that the amount of time worked (H) is the cause of the student grade (G). If we were to doubt our intuition, a simple timeline argument supports the claim. As the studying happens before the exam, the exam cannot be the cause of the studying. We say that H is the cause of G. In addition, students with higher GPA are more likely to get higher paying jobs (S). Hence we claim that G causes S. The relationship between the three variables is depicted in Figure 1, where arrows represent causal relationships. A more in depth explanation of such causal graphs takes place in Section *Structural Equation Model and causal graphs*. 
 
 ![Student GPA causal graph](../images/2020-11-07-causality/ISO_figures-Page-1-intro-fig.jpg)
-*Figure 1: Student GPA causal graph*
+__*Figure 1: Student GPA causal graph*__
 
 What are the defining factors of the causal relationship between H and G? We will answer this question in Section *Causal parents*. In Section *Interventions* we explain how environments may change, whereas in the next Section *Invariant predictors* we discuss two methods to utilise the invariance of causal relationships to build robust predictive models across environments.
 
@@ -45,3 +45,9 @@ $$P(G|\,\text{par}(G), Z) = P(G|\,\text{par}(G))\quad\forall Z\notin \text{par}(
 Assume a student transfers from university A to university B, where university A and B have standardised examinations, changing the observational setting. Denote by $e_1$ the first environment, and $e_2$ the second. Regardless of the location, the same student will achieve the same GPA. More generally, parents of a variable have the same effect on the variable. 
 
 $$P(G^{e_1}|\,\text{par}^{e_1}(G)) = P(G^{e_2}|\,\text{par}^{e_2}(G))$$
+\begin{equation}
+    P(G^{e_1}|\,\text{par}^{e_1}(G)) = P(G^{e_2}|\,\text{par}^{e_2}(G))
+\label{eq:parent-inv}
+\end{equation}
+
+This property is not limited to observational data. Suppose we forcefully intervened on the difficulty of the exam by increasing considerably its complexity. All other factors remain constant except the exam difficulty. The relationship between the exam difficulty and the GPA would not be broken, rather we would observe a different part of its distribution. Hence equality \ref{eq:parent-inv} would still hold. This is in contrast with the first salary example discussed in the introduction. In the latter, the distribution $P(G|S)$ would vary from one university to the other.
