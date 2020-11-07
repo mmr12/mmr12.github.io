@@ -105,6 +105,22 @@ __*Figure 2: Three Markov equivalent graphs*__
     - $X\rightarrow Z \leftarrow Y$ and all of $Z$ and $Z$'s descendants are unobserved|
 
 If we assume the causal graph will be one of the Markov equivalent graphs, we cannot know which equivalent graph that is. On the other hand, two variables might be independent in probability but linked in causality. As an example, take the relationship between weight and exercise. Exercise consumes calories which decreases weight, but also increases appetite which increases weight. If in a dataset collected the causal effect of exercise on weight and appetite cancel each other then one would observe that weight and exercise are probabilistically independent.
+
+#### Assumptions
+So far we described how causal parents are defined, and how causal graphs and Bayesian graphs relate (or rather how they do not).
+
+In order to reach more meaningful conclusions, a few assumptions can be to restrict the universe of possibilities. 
+
+**Acyclicity**: A common assumption, which we will make ourselves throughout the manuscript is that there are no feedback cycles in the causal graph. Hence causal graphs are acyclical.
+
+**Faithfulness**: The faithfulness assumption says that there are no two paths that cancel each other out. Formally, if any independence relation in a dataset is not a consequence of the Causal Markov Condition, then the dataset in unfaithful Eberhardt
+and Scheines [2007][^5]. Going back to the weight and exercise example, the dataset where the two variables are independent is unfaithful and would commonly be discarded.
+This assumption allows for a stronger link between Bayesian Networks and causal graphs. Given every independence found in a dataset is the result of the Causal Markov Condition, then one of hte Markov equivalent Bayesian graphs represents the  causal relationships of the system.
+
+A criticism of assuming faithfulness is that up to our knowledge, there is no method to test for faithfulness without knowledge of the underlying causal graph.
+
+
+Having defined the causal graph, we now describe how different environments are created.
 ## Footnotes
 
 [^1]: [Peters, J., Bü̈hlmann, P. and Meinshausen, N. [2016], ‘Causal inference by using invariant prediction: identification and confidence intervals’, Journal of the Royal Statistical Society: Series B (Statistical Methodology) 78(5), 947–1012.](https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167)
@@ -114,3 +130,5 @@ If we assume the causal graph will be one of the Markov equivalent graphs, we ca
 [^3]: [Scheines, R. [1997], ‘An introduction to causal inference’.](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.118.3002)
 
 [^4]: [Dawid, A. P. [2010], Beware of the dag!, in I. Guyon, D. Janzing and B. Scho ̈lkopf, eds, ‘Proceedings of Workshop on Causality: Objectives and Assessment at NIPS 2008’, Vol. 6 of Proceedings of Machine Learning Research, PMLR, Whistler, Canada, pp. 59– 86.](http://proceedings.mlr.press/v6/dawid10a.html)
+
+[^5]: [Eberhardt, F. and Scheines, R. [2007], ‘Interventions and causal inference’, Philosophy of Science 74(5), 981–995.](http://www.jstor.org/stable/10.1086/525638)
